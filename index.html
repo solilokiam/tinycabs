@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>&#128661; Tiny Cab &#128661;</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="page-header"></header>
+    <div class="dashboard">
+      <div class="header">
+        <div class="logo">&#128661; TinyCab</div>
+        <div class="filterbar">
+          <form>
+            <select name="vendor" id="vendors">
+              <option value="-1">All Vendors</option>
+            </select>
+            <input name="start" id="startFilter" type="date" value="2017-06-01" />
+            <input name="end" id="endFilter" type="date" value="2017-06-01" />
+            <button>Filter</button>
+          </form>
+        </div>
+      </div>
+      <div id="errors"></div>
+      <div class="section">
+        <h1>Overall Data</h1>
+        <div class="widgets">
+          <div class="widget">
+            <div class="widget-value" id="travels"></div>
+            <div class="widget-title">Rides</div>
+          </div>
+          <div class="widget">
+            <div class="widget-value" id="distance"></div>
+            <div class="widget-title">Miles</div>
+          </div>
+          <div class="widget">
+            <div class="widget-value" id="amount"></div>
+            <div class="widget-title">Dollars</div>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <h1>Rides Details</h1>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Vendor</th>
+              <th>PickUp</th>
+              <th>Drop</th>
+              <th>Passenger Count</th>
+              <th>Distance</th>
+              <th>Total Amount</th>
+            </tr>
+          </thead>
+          <tbody id="operations"></tbody>
+        </table>
+      </div>
+    </div>
+    <script src="https://cdn.tinybird.co/v1/tinybird.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

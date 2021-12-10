@@ -1,0 +1,15 @@
+{
+  "name": "tinycabs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:solilokiam/tinycabs.git",
+  "author": "Miquel Company Rodriguez <miquel@solilokiam.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "serve"
+  },
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
+}
