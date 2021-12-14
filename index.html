@@ -12,12 +12,14 @@
     <div class="dashboard">
       <div class="header">
         <div class="logo">&#128661; TinyCab</div>
-        <div class="filterbar">
+        <div class="filter">
           <form>
             <select name="vendor" id="vendor">
               <option value="-1">All Vendors</option>
             </select>
+            <label for="start">Start</label>
             <input name="start" id="startFilter" type="date" value="2017-01-01" />
+            <label for="start">End</label>
             <input name="end" id="endFilter" type="date" value="2022-01-01" />
             <button id="filterBtn">Filter</button>
           </form>
@@ -41,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="section">
+      <div class="section details">
         <h1>Rides Details</h1>
         <table class="table">
           <thead>
