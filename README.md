@@ -1,21 +1,23 @@
 # TinyCab
 
-This project is a simple dashboard that extracts data from a tinybird [API endpoint](https://api.tinybird.co/endpoint/t_f3b68895534049bf859f38a8e5ebc51a?token=p.eyJ1IjogIjdmOTIwMmMzLWM1ZjctNDU4Ni1hZDUxLTdmYzUzNTRlMTk5YSIsICJpZCI6ICJmZTRkNWFiZS05ZWIyLTRjMjYtYWZiZi0yYTdlMWJlNDQzOWEifQ.P67MfoqTixyasaMGH5RIjCrGc0bUKvBoKMwYjfqQN8c).
+This project is a simple widget that extracts data from a tinybird [API endpoint](https://api.tinybird.co/endpoint/t_f3b68895534049bf859f38a8e5ebc51a?token=p.eyJ1IjogIjdmOTIwMmMzLWM1ZjctNDU4Ni1hZDUxLTdmYzUzNTRlMTk5YSIsICJpZCI6ICJmZTRkNWFiZS05ZWIyLTRjMjYtYWZiZi0yYTdlMWJlNDQzOWEifQ.P67MfoqTixyasaMGH5RIjCrGc0bUKvBoKMwYjfqQN8c).
 
 ## Decisions
 ### Product
 After reviewing the data from the endpoint it came clear that this endpoint returns information about cab rides.
-My ideal dashboard would have been a map to place all rides but unfortunately origin and destination are quite available.
+My ideal widget would have been a map to place all rides but unfortunately origin and destination are not really available.
 So the next important thing is get some numbers about revenue and rides. After displaying this information I decided to be able to filter in a timespan manner but also being able to filter by vendor.
+In terms of displaying information I've decided to display some counters on "small" devices. But extend the information for big screens adding a detail table. This table is limited to 50 rows but with more time this should be paginated.
 
 ### Tech
 This project uses [serve](https://github.com/vercel/serve) as development server to make things easier.
 I have also decided to not add any kind of 3rd party library for timepickers as I believe it's out of the scope.
 
 ## Design
-The dashboard looks like:
+The widget looks like:
 
-![Dashboard Screenshot](/assets/screenshot.png?raw=true)
+![Desktop Mobile](/assets/screenshot-mobile.png?raw=true)
+![Desktop Screenshot](/assets/screenshot-desktop.png?raw=true)
 
 ## How to start the project.
 ### Requirements
