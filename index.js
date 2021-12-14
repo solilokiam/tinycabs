@@ -7,6 +7,15 @@ function logResponse(res) {
     }
 }
 
+function addError(error) {
+    const errorElem = document.createElement('DIV');
+    errorElem.className = 'error'
+    errorElem.innerHTML = error;
+    console.log(errorElem);
+    document.getElementById('errors').appendChild(errorElem);
+    console.error(error);
+}
+
 async function renderFilters() {
     const params = new URLSearchParams(window.location.search);
 
@@ -25,18 +34,27 @@ async function renderFilters() {
     })
 
     if (vendors.error) {
-        const errors = document.getElementById('errors');
-        errors.innerHTML = `there is a problem running the query: ${operations.error}`;
-    } else {
-        const vendorSelect = document.getElementById('vendor');
-        for (var i = 0; i < vendors.data.length; i++) {
-            var vendor = vendors.data[i].vendorid;
-            vendorSelect.add(new Option(vendor, vendor, false, vendor == params.get('vendor')))
-        }
+        addError(vendors.error);
+        return;
+    }
+
+    const vendorSelect = document.getElementById('vendor');
+    for (var i = 0; i < vendors.data.length; i++) {
+        var vendor = vendors.data[i].vendorid;
+        vendorSelect.add(new Option(vendor, vendor, false, vendor == params.get('vendor')))
     }
 }
 
-function renderOperations(operations) {
+async function renderOperations(operations) {
+    var operations = await pipe.json({
+        q: `SELECT * FROM _ ${buildQueryWhere()} LIMIT 50`
+    })
+
+    if (operations.error) {
+        addError(operations.error)
+        return;
+    }
+
     const operationsTable = document.getElementById('operations');
     if (operations.data.length === 0) {
         var row = operationsTable.insertRow();
@@ -63,7 +81,16 @@ function renderOperations(operations) {
     }
 }
 
-function renderSums(sums) {
+async function renderSums() {
+    var sums = await pipe.json({
+        q: `select SUM(passenger_count) as total_passengers, SUM(trip_distance) as total_distance, SUM(total_amount) as total_amount from _ ${buildQueryWhere()}`
+    });
+
+    if (sums.error) {
+        addError(sums.error);
+        return;
+    }
+
     document.getElementById('travels').innerHTML = new Intl.NumberFormat('en-US').format(sums.data[0].total_passengers);
     document.getElementById('distance').innerHTML = new Intl.NumberFormat('en-US').format(sums.data[0].total_distance);
     document.getElementById('amount').innerHTML = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(sums.data[0].total_amount);
@@ -97,25 +124,9 @@ function buildQueryWhere() {
 
 
 async function run() {
-    var where = buildQueryWhere();
-
-    var sums = await pipe.json({
-        q: `select SUM(passenger_count) as total_passengers, SUM(trip_distance) as total_distance, SUM(total_amount) as total_amount from _ ${where}`
-    });
-
-    var operations = await pipe.json({
-        q: `SELECT * FROM _ ${where} LIMIT 50`
-    })
-
-    if (operations.error) {
-        var errors = document.getElementById('errors');
-        errors.innerHTML = `there is a problem running the query: ${operations.error}`;
-    } else {
-        logResponse(operations);
-        renderFilters();
-        renderOperations(operations);
-        renderSums(sums);
-    }
+    renderFilters();
+    renderOperations();
+    renderSums();
 }
 
 var tinyb = tinybird('p.eyJ1IjogIjdmOTIwMmMzLWM1ZjctNDU4Ni1hZDUxLTdmYzUzNTRlMTk5YSIsICJpZCI6ICJmZTRkNWFiZS05ZWIyLTRjMjYtYWZiZi0yYTdlMWJlNDQzOWEifQ.P67MfoqTixyasaMGH5RIjCrGc0bUKvBoKMwYjfqQN8c');
