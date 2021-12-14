@@ -1,17 +1,7 @@
-function logResponse(res) {
-    console.table(res.data);
-    console.log(res.data);
-    console.log("** Query columns **");
-    for (let column of res.meta) {
-        console.log(`${column.name} -> ${column.type}`);
-    }
-}
-
 function addError(error) {
     const errorElem = document.createElement('DIV');
     errorElem.className = 'error'
     errorElem.innerHTML = error;
-    console.log(errorElem);
     document.getElementById('errors').appendChild(errorElem);
     console.error(error);
 }
