@@ -67,9 +67,11 @@ describe('TinyCab dashboard', () => {
     })
 
     it('filters with wrong filter values', () => {
-        cy.visit('/?vendor=-1&start=-01-01&end=200601');
+        cy.visit('/?vendor=pepe');
+        cy.waitForNetworkIdle(2000);
         cy.get('#travels').should('contain', '0');
         cy.get('#operations tr').should('have.length', 0)
+        cy.get('.error').should('have.length', 2)
     });
 
     it('filters with empty value', () => {
