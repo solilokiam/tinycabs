@@ -7,9 +7,12 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "serve"
+    "start": "serve",
+    "test": "cypress run"
   },
   "devDependencies": {
+    "cypress": "^9.1.1",
+    "cypress-network-idle": "^1.3.3",
     "serve": "^13.0.2"
   }
 }

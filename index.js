@@ -28,7 +28,7 @@ async function renderFilters() {
         const errors = document.getElementById('errors');
         errors.innerHTML = `there is a problem running the query: ${operations.error}`;
     } else {
-        const vendorSelect = document.getElementById('vendors');
+        const vendorSelect = document.getElementById('vendor');
         for (var i = 0; i < vendors.data.length; i++) {
             var vendor = vendors.data[i].vendorid;
             vendorSelect.add(new Option(vendor, vendor, false, vendor == params.get('vendor')))
