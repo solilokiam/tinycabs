@@ -8,6 +8,12 @@ body {
   height: 100%;
 }
 
+input[type="date"]
+{
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
+
 * {
   padding: 0;
   margin: 0;
